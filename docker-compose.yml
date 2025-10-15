@@ -1,0 +1,23 @@
+services:
+  npm: &npm
+    image: node:22
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ${SSH_AUTH_SOCK:-no-agent}:/ssh-agent
+      - .npmrc:/home/node/.npmrc
+    environment:
+      - NODE_ENV=development
+    entrypoint: [ npm ]
+
+  storybook:
+    <<: *npm
+    command: [ run, storybook, --, --no-open ]
+    ports:
+      - "6006:6006"
+    stdin_open: true
+    tty: true
+
+volumes:
+  no-agent:
+    driver: local
