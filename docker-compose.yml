@@ -15,8 +15,6 @@ services:
     command: [ run, storybook, --, --no-open ]
     ports:
       - "6006:6006"
-    stdin_open: true
-    tty: true
 
 volumes:
   no-agent:
