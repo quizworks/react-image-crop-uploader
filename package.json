@@ -1,25 +1,7 @@
 {
-  "name": "@alekpr/react-image-crop-uploader",
-  "version": "1.1.0",
+  "name": "@quizworks/react-image-crop-uploader",
+  "version": "0.0.0",
   "description": "A comprehensive React image upload component with modal-based cropping capabilities and selective upload support",
-  "author": "alekpr <alek.pr@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alekpr/react-image-crop-uploader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alekpr/react-image-crop-uploader/issues"
-  },
-  "keywords": [
-    "react",
-    "image",
-    "upload",
-    "crop",
-    "cropping",
-    "modal",
-    "ui"
-  ],
   "type": "module",
   "exports": {
     ".": {
