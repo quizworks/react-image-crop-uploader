@@ -11,4 +11,4 @@ services:
     <<: *npm
     command: [ run, storybook, --, --no-open ]
     ports:
-      - "6006:6006"
+      - "6008:6006"
