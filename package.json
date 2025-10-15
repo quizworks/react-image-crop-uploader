@@ -1,5 +1,5 @@
 {
-  "name": "@quizworks/react-image-crop-uploader",
+  "name": "@easy-lms/react-image-crop-uploader",
   "version": "0.0.0",
   "description": "A comprehensive React image upload component with modal-based cropping capabilities and selective upload support",
   "type": "module",
