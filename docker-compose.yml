@@ -2,12 +2,11 @@ services:
   npm: &npm
     image: node:22
     working_dir: /app
+    user: '${UID:-1000}:${GID:-1000}'
     volumes:
       - .:/app
       - ${SSH_AUTH_SOCK:-no-agent}:/ssh-agent
       - .npmrc:/home/node/.npmrc
-    environment:
-      - NODE_ENV=development
     entrypoint: [ npm ]
 
   storybook:
