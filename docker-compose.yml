@@ -1,0 +1,14 @@
+services:
+  npm: &npm
+    image: node:22
+    working_dir: /app
+    user: '${UID:-1000}:${GID:-1000}'
+    volumes:
+      - .:/app
+    entrypoint: [ npm ]
+
+  storybook:
+    <<: *npm
+    command: [ run, storybook, --, --no-open ]
+    ports:
+      - "6008:6006"
