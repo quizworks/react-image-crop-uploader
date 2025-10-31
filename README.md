@@ -347,6 +347,7 @@ function App() {
 | `className` | `string` | `''` | Custom CSS class |
 | `showEditButton` | `boolean` | `true` | Show edit button on previews |
 | `editButtonText` | `string` | `'Edit'` | Text for edit button |
+| `deleteButtonText` | `string` | `Delete` | Text for delete button |
 | `showUploadButton` | `boolean` | `true` | Show upload button when files are present and uploadUrl is provided |
 | `uploadButtonText` | `string` | `'Upload'` | Text for upload button. Shows file count for multiple files |
 | `uploadButtonClassName` | `string` | `''` | Custom CSS class for upload button. Falls back to default styling if empty |

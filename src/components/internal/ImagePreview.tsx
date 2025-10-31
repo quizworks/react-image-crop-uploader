@@ -7,6 +7,7 @@ interface ImagePreviewProps {
   onEdit: () => void;
   showEditButton?: boolean;
   editButtonText?: string;
+  deleteButtonText?: string;
 }
 
 export const ImagePreview: React.FC<ImagePreviewProps> = ({
@@ -15,9 +16,10 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
   onEdit,
   showEditButton = true,
   editButtonText = 'Edit',
+  deleteButtonText = 'Delete',
 }) => {
   return (
-    <div 
+    <div
       className="image-preview"
       style={{
         display: 'inline-block',
@@ -28,9 +30,9 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
         margin: '0.5rem',
       }}
     >
-      <img 
+      <img
         key={`${file.id}-${file.previewUrl}`}
-        src={file.previewUrl} 
+        src={file.previewUrl}
         alt={`Preview of ${file.file.name}`}
         style={{
           width: '150px',
@@ -40,8 +42,8 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
           backgroundColor: '#f3f4f6',
         }}
       />
-      
-      <div 
+
+      <div
         className="image-preview-actions"
         style={{
           position: 'absolute',
@@ -52,8 +54,8 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
         }}
       >
         {showEditButton && (
-          <button 
-            onClick={onEdit} 
+          <button
+            onClick={onEdit}
             type="button"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -68,8 +70,8 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
             {editButtonText}
           </button>
         )}
-        <button 
-          onClick={onRemove} 
+        <button
+          onClick={onRemove}
           type="button"
           style={{
             backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -81,12 +83,12 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
             fontWeight: '500',
           }}
         >
-          ×
+          {deleteButtonText}
         </button>
       </div>
-      
+
       {file.isCropped && (
-        <div 
+        <div
           className="crop-indicator"
           style={{
             position: 'absolute',
