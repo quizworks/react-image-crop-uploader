@@ -5,6 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Live Demo](https://img.shields.io/badge/🚀-Live%20Demo-blue.svg)](https://github.com/alekpr/react-image-upload-library-sample)
 
+This repository is a direct fork of the original [react-image-crop-uploader](https://www.npmjs.com/package/@alekpr/react-image-crop-uploader).
+
 A comprehensive React image upload component with modal-based cropping capabilities. This library provides an all-in-one solution for handling image uploads with cropping functionality in your React applications.
 
 ## 📚 Live Demo & Examples
