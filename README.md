@@ -353,6 +353,7 @@ function App() {
 | `uploadButtonClassName` | `string` | `''` | Custom CSS class for upload button. Falls back to default styling if empty |
 | `uploadButtonText` | `string` | `'Upload'` | Text for upload button |
 | `uploadButtonClassName` | `string` | `''` | Custom CSS class for upload button |
+| `croppedBadgeText` | `string` | `Cropped` | Text label displayed on images that have been cropped
 
 ### Modal Configuration
 

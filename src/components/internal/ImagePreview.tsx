@@ -8,6 +8,7 @@ interface ImagePreviewProps {
   showEditButton?: boolean;
   editButtonText?: string;
   deleteButtonText?: string;
+  croppedBadgeText?: string;
 }
 
 export const ImagePreview: React.FC<ImagePreviewProps> = ({
@@ -17,6 +18,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
   showEditButton = true,
   editButtonText = 'Edit',
   deleteButtonText = 'Delete',
+  croppedBadgeText = 'Cropped',
 }) => {
   return (
     <div
@@ -102,7 +104,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({
             fontWeight: '600',
           }}
         >
-          Cropped
+          {croppedBadgeText}
         </div>
       )}
     </div>
