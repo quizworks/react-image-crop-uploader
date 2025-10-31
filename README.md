@@ -343,6 +343,8 @@ function App() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `placeholder` | `string` | `'Drag & drop images here or click to select'` | Placeholder text |
+| `singleFileHint` | `string` | `Select an image` | `Text shown to guide the user when only a single file can be selected` |
+| `multipleFilesHint` | `string` | `Select multiple images` | `Text shown to guide the user when multiple files can be selected` |
 | `disabled` | `boolean` | `false` | Disable the component |
 | `className` | `string` | `''` | Custom CSS class |
 | `showEditButton` | `boolean` | `true` | Show edit button on previews |

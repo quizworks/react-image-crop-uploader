@@ -6,6 +6,8 @@ interface DropZoneProps {
   disabled?: boolean;
   multiple?: boolean;
   accept?: string;
+  singleFileHint?: string;
+  multipleFilesHint?: string;
 }
 
 export interface DropZoneRef {
@@ -18,6 +20,8 @@ export const DropZone = forwardRef<DropZoneRef, DropZoneProps>(({
   disabled = false,
   multiple = false,
   accept = 'image/*',
+  singleFileHint = 'Select an image',
+  multipleFilesHint = 'Select multiple images',
 }, ref) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -25,7 +29,7 @@ export const DropZone = forwardRef<DropZoneRef, DropZoneProps>(({
   useImperativeHandle(ref, () => ({
     openFileSelector: () => {
       fileInputRef.current?.click();
-    }
+    },
   }));
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -42,15 +46,15 @@ export const DropZone = forwardRef<DropZoneRef, DropZoneProps>(({
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    
+
     if (disabled || !e.dataTransfer.files.length) return;
-    
+
     onFilesSelected(e.dataTransfer.files);
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled || !e.target.files) return;
-    
+
     onFilesSelected(e.target.files);
     // Reset input to allow selecting the same file again
     e.target.value = '';
@@ -72,10 +76,10 @@ export const DropZone = forwardRef<DropZoneRef, DropZoneProps>(({
       <div className="drop-zone-content">
         <p className="drop-zone-placeholder">{placeholder}</p>
         <p className="drop-zone-info">
-          {multiple ? 'Select multiple images' : 'Select an image'}
+          {multiple ? multipleFilesHint : singleFileHint}
         </p>
       </div>
-      
+
       <input
         ref={fileInputRef}
         type="file"
