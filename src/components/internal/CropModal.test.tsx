@@ -33,11 +33,12 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     expect(screen.getByText('Crop Image')).toBeInTheDocument();
     expect(screen.getByText('Save')).toBeInTheDocument();
     expect(screen.getByText('Cancel')).toBeInTheDocument();
     expect(screen.getByText('Reset')).toBeInTheDocument();
+    expect(screen.getByText('Zoom:')).toBeInTheDocument();
     expect(screen.getByTestId('mock-cropper')).toBeInTheDocument();
   });
 
@@ -51,7 +52,7 @@ describe('CropModal', () => {
         title="Custom Title"
       />
     );
-    
+
     expect(screen.getByText('Custom Title')).toBeInTheDocument();
   });
 
@@ -65,12 +66,14 @@ describe('CropModal', () => {
         saveButtonText="Custom Save"
         cancelButtonText="Custom Cancel"
         resetButtonText="Custom Reset"
+        zoomButtonText="Custom Zoom:"
       />
     );
-    
+
     expect(screen.getByText('Custom Save')).toBeInTheDocument();
     expect(screen.getByText('Custom Cancel')).toBeInTheDocument();
     expect(screen.getByText('Custom Reset')).toBeInTheDocument();
+    expect(screen.getByText('Custom Zoom:')).toBeInTheDocument();
   });
 
   test('calls onCancel when cancel button is clicked', () => {
@@ -82,10 +85,10 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     const cancelButton = screen.getByText('Cancel');
     fireEvent.click(cancelButton);
-    
+
     expect(mockOnCancel).toHaveBeenCalled();
   });
 
@@ -98,10 +101,10 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     const closeButton = screen.getByText('×');
     fireEvent.click(closeButton);
-    
+
     expect(mockOnCancel).toHaveBeenCalled();
   });
 
@@ -114,10 +117,10 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     const resetButton = screen.getByText('Reset');
     fireEvent.click(resetButton);
-    
+
     // We can't easily test the reset functionality without a full implementation
     // but we can verify the function was called
     expect(mockOnCancel).not.toHaveBeenCalled(); // Reset shouldn't call onCancel
@@ -132,7 +135,7 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     // The image is handled by react-easy-crop, so we check for the mock
     expect(screen.getByTestId('mock-cropper')).toBeInTheDocument();
   });
@@ -146,7 +149,7 @@ describe('CropModal', () => {
         aspectRatio={16/9}
       />
     );
-    
+
     // We can't easily test the visual aspect ratio without a full DOM environment
     // but we can verify the component renders without errors
     expect(screen.getByText('Crop Image')).toBeInTheDocument();
@@ -161,7 +164,7 @@ describe('CropModal', () => {
         aspectRatio="free"
       />
     );
-    
+
     // We can't easily test the visual aspect ratio without a full DOM environment
     // but we can verify the component renders without errors
     expect(screen.getByText('Crop Image')).toBeInTheDocument();
