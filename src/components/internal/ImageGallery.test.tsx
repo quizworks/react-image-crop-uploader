@@ -9,7 +9,7 @@ global.URL.revokeObjectURL = jest.fn();
 describe('ImageGallery', () => {
   const mockFile1 = new File(['test1'], 'test1.jpg', { type: 'image/jpeg' });
   const mockFile2 = new File(['test2'], 'test2.jpg', { type: 'image/jpeg' });
-  
+
   const mockImageFiles = [
     {
       id: '1',
@@ -43,7 +43,7 @@ describe('ImageGallery', () => {
         onEdit={mockOnEdit}
       />
     );
-    
+
     expect(container.firstChild).toBeNull();
   });
 
@@ -55,10 +55,10 @@ describe('ImageGallery', () => {
         onEdit={mockOnEdit}
       />
     );
-    
+
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(2);
-    
+
     expect(images[0]).toHaveAttribute('src', 'mock-url-1');
     expect(images[1]).toHaveAttribute('src', 'mock-url-2');
   });
@@ -71,7 +71,7 @@ describe('ImageGallery', () => {
         onEdit={mockOnEdit}
       />
     );
-    
+
     // Only the second image should have a crop indicator
     const cropIndicators = screen.getAllByText('Cropped');
     expect(cropIndicators).toHaveLength(1);
@@ -86,7 +86,7 @@ describe('ImageGallery', () => {
         showEditButton={true}
       />
     );
-    
+
     const editButtons = screen.getAllByText('Edit');
     expect(editButtons).toHaveLength(2);
   });
@@ -100,7 +100,7 @@ describe('ImageGallery', () => {
         showEditButton={false}
       />
     );
-    
+
     expect(screen.queryByText('Edit')).not.toBeInTheDocument();
   });
 
@@ -114,7 +114,7 @@ describe('ImageGallery', () => {
         editButtonText="Custom Edit"
       />
     );
-    
+
     const editButtons = screen.getAllByText('Custom Edit');
     expect(editButtons).toHaveLength(2);
   });
@@ -127,10 +127,10 @@ describe('ImageGallery', () => {
         onEdit={mockOnEdit}
       />
     );
-    
-    const removeButtons = screen.getAllByText('×');
+
+    const removeButtons = screen.getAllByText('Delete');
     fireEvent.click(removeButtons[0]);
-    
+
     expect(mockOnRemove).toHaveBeenCalledWith(0);
   });
 
@@ -143,10 +143,10 @@ describe('ImageGallery', () => {
         showEditButton={true}
       />
     );
-    
+
     const editButtons = screen.getAllByText('Edit');
     fireEvent.click(editButtons[1]);
-    
+
     expect(mockOnEdit).toHaveBeenCalledWith(mockImageFiles[1], 1);
   });
 });

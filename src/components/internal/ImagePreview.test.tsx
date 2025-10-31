@@ -8,7 +8,7 @@ global.URL.revokeObjectURL = jest.fn();
 
 describe('ImagePreview', () => {
   const mockFile = new File(['test'], 'test.jpg', { type: 'image/jpeg' });
-  
+
   const mockImageFile = {
     id: '1',
     file: mockFile,
@@ -31,9 +31,9 @@ describe('ImagePreview', () => {
         file={mockImageFile}
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
-      />
+      />,
     );
-    
+
     const image = screen.getByRole('img');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'mock-url');
@@ -44,15 +44,15 @@ describe('ImagePreview', () => {
       ...mockImageFile,
       previewUrl: 'https://example.com/image.jpg',
     };
-    
+
     render(
       <ImagePreview
         file={httpImageFile}
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
-      />
+      />,
     );
-    
+
     const image = screen.getByRole('img');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
@@ -63,15 +63,15 @@ describe('ImagePreview', () => {
       ...mockImageFile,
       isCropped: true,
     };
-    
+
     render(
       <ImagePreview
         file={croppedImageFile}
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
-      />
+      />,
     );
-    
+
     expect(screen.getByText('Cropped')).toBeInTheDocument();
   });
 
@@ -81,9 +81,9 @@ describe('ImagePreview', () => {
         file={mockImageFile}
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
-      />
+      />,
     );
-    
+
     expect(screen.queryByText('Cropped')).not.toBeInTheDocument();
   });
 
@@ -94,10 +94,10 @@ describe('ImagePreview', () => {
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
         showEditButton={true}
-      />
+      />,
     );
-    
-    expect(screen.getByText('Edit')).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
   });
 
   test('hides edit button when showEditButton is false', () => {
@@ -107,10 +107,10 @@ describe('ImagePreview', () => {
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
         showEditButton={false}
-      />
+      />,
     );
-    
-    expect(screen.queryByText('Edit')).not.toBeInTheDocument();
+
+    expect(screen.queryByRole('button', { name: 'Edit' })).not.toBeInTheDocument();
   });
 
   test('uses custom edit button text', () => {
@@ -121,10 +121,10 @@ describe('ImagePreview', () => {
         onEdit={mockOnEdit}
         showEditButton={true}
         editButtonText="Custom Edit"
-      />
+      />,
     );
-    
-    expect(screen.getByText('Custom Edit')).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: 'Custom Edit' })).toBeInTheDocument();
   });
 
   test('calls onRemove when remove button is clicked', () => {
@@ -133,12 +133,12 @@ describe('ImagePreview', () => {
         file={mockImageFile}
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
-      />
+      />,
     );
-    
-    const removeButton = screen.getByText('×');
+
+    const removeButton = screen.getByRole('button', { name: 'Delete' });
     fireEvent.click(removeButton);
-    
+
     expect(mockOnRemove).toHaveBeenCalled();
   });
 
@@ -149,12 +149,12 @@ describe('ImagePreview', () => {
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
         showEditButton={true}
-      />
+      />,
     );
-    
-    const editButton = screen.getByText('Edit');
+
+    const editButton = screen.getByRole('button', { name: 'Edit' });
     fireEvent.click(editButton);
-    
+
     expect(mockOnEdit).toHaveBeenCalled();
   });
 
@@ -165,9 +165,9 @@ describe('ImagePreview', () => {
         onRemove={mockOnRemove}
         onEdit={mockOnEdit}
         showEditButton={false}
-      />
+      />,
     );
-    
-    expect(screen.queryByText('Edit')).not.toBeInTheDocument();
+
+    expect(screen.queryByRole('button', { name: 'Edit' })).not.toBeInTheDocument();
   });
 });

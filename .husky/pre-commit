@@ -1,1 +1,1 @@
-npm test
+docker-compose run npm test

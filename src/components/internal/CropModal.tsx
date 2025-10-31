@@ -12,6 +12,7 @@ interface CropModalProps {
   saveButtonText?: string;
   cancelButtonText?: string;
   resetButtonText?: string;
+  zoomButtonText?: string;
 }
 
 interface Area {
@@ -79,6 +80,7 @@ export const CropModal: React.FC<CropModalProps> = ({
   saveButtonText = 'Save',
   cancelButtonText = 'Cancel',
   resetButtonText = 'Reset',
+  zoomButtonText = 'Zoom:',
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -90,7 +92,7 @@ export const CropModal: React.FC<CropModalProps> = ({
       // Use File object
       const objectUrl = URL.createObjectURL(file);
       setImageSrc(objectUrl);
-      
+
       // Clean up object URL
       return () => {
         URL.revokeObjectURL(objectUrl);
@@ -107,14 +109,14 @@ export const CropModal: React.FC<CropModalProps> = ({
 
   const handleSave = async () => {
     if (!croppedAreaPixels) return;
-    
+
     try {
       const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
-      
+
       // Determine filename and type
       let fileName = 'cropped-image.jpg';
       let fileType = 'image/jpeg';
-      
+
       if (file) {
         fileName = file.name;
         fileType = file.type;
@@ -132,7 +134,7 @@ export const CropModal: React.FC<CropModalProps> = ({
           fileType = 'image/webp';
         }
       }
-      
+
       const croppedFile = new File([croppedBlob], fileName, {
         type: fileType,
         lastModified: Date.now(),
@@ -159,7 +161,7 @@ export const CropModal: React.FC<CropModalProps> = ({
   const numericAspectRatio = aspectRatio === 'free' ? undefined : aspectRatio;
 
   return (
-    <div 
+    <div
       className="crop-modal-overlay"
       onKeyDown={handleKeyDown}
       tabIndex={-1}
@@ -167,15 +169,15 @@ export const CropModal: React.FC<CropModalProps> = ({
       <div className="crop-modal">
         <div className="crop-modal-header">
           <h2>{title}</h2>
-          <button 
-            className="close-button" 
+          <button
+            className="close-button"
             onClick={onCancel}
             aria-label="Close"
           >
             ×
           </button>
         </div>
-        
+
         <div className="crop-modal-content">
           <div className="crop-container">
             <Cropper
@@ -193,9 +195,9 @@ export const CropModal: React.FC<CropModalProps> = ({
             />
           </div>
         </div>
-        
+
         <div className="crop-controls">
-          <label htmlFor="zoom-slider">Zoom:</label>
+          <label htmlFor="zoom-slider">{zoomButtonText}</label>
           <input
             id="zoom-slider"
             type="range"
@@ -208,7 +210,7 @@ export const CropModal: React.FC<CropModalProps> = ({
           />
           <span className="zoom-value">{Math.round(zoom * 100)}%</span>
         </div>
-        
+
         <div className="crop-modal-actions">
           <button className="reset-button" onClick={handleReset}>
             {resetButtonText}

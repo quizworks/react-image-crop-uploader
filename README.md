@@ -263,7 +263,7 @@ function App() {
   const handleUploadComplete = ({ unuploadedFiles, uploadResponse }) => {
     console.log('New files uploaded:', unuploadedFiles);
     console.log('Server response:', uploadResponse);
-    
+
     // Add new uploaded image URLs to the collection
     if (uploadResponse?.imageUrls) {
       setUploadedImages(prev => [...prev, ...uploadResponse.imageUrls]);
@@ -343,15 +343,19 @@ function App() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `placeholder` | `string` | `'Drag & drop images here or click to select'` | Placeholder text |
+| `singleFileHint` | `string` | `Select an image` | `Text shown to guide the user when only a single file can be selected` |
+| `multipleFilesHint` | `string` | `Select multiple images` | `Text shown to guide the user when multiple files can be selected` |
 | `disabled` | `boolean` | `false` | Disable the component |
 | `className` | `string` | `''` | Custom CSS class |
 | `showEditButton` | `boolean` | `true` | Show edit button on previews |
 | `editButtonText` | `string` | `'Edit'` | Text for edit button |
+| `deleteButtonText` | `string` | `Delete` | Text for delete button |
 | `showUploadButton` | `boolean` | `true` | Show upload button when files are present and uploadUrl is provided |
 | `uploadButtonText` | `string` | `'Upload'` | Text for upload button. Shows file count for multiple files |
 | `uploadButtonClassName` | `string` | `''` | Custom CSS class for upload button. Falls back to default styling if empty |
 | `uploadButtonText` | `string` | `'Upload'` | Text for upload button |
 | `uploadButtonClassName` | `string` | `''` | Custom CSS class for upload button |
+| `croppedBadgeText` | `string` | `Cropped` | Text label displayed on images that have been cropped
 
 ### Modal Configuration
 
@@ -362,6 +366,7 @@ function App() {
 | `cropModalProps.saveButtonText` | `string` | `'Save'` | Save button text |
 | `cropModalProps.cancelButtonText` | `string` | `'Cancel'` | Cancel button text |
 | `cropModalProps.resetButtonText` | `string` | `'Reset'` | Reset button text |
+| `cropModalProps.zoomControlText` | `string` | `'Zoom:'` | Zoom control text |
 
 ```
 
@@ -415,10 +420,10 @@ The `onUploadComplete` callback now provides more detailed information:
 onUploadComplete={({ unuploadedFiles, uploadResponse }) => {
   // unuploadedFiles: Array of File objects that were just uploaded
   // uploadResponse: The actual server response
-  
+
   console.log(`${unuploadedFiles.length} new files uploaded`);
   console.log('Server response:', uploadResponse);
-  
+
   // Handle the response based on your API structure
   if (uploadResponse.success) {
     // Update your state with new image URLs
@@ -453,8 +458,8 @@ onUploadComplete={({ unuploadedFiles, uploadResponse }) => {
   onUploadComplete={({ unuploadedFiles, uploadResponse }) => {
     // Only new images are uploaded to server
     const newImageUrls = uploadResponse.imageUrls;
-    updateProduct({ 
-      imageUrls: [...product.imageUrls, ...newImageUrls] 
+    updateProduct({
+      imageUrls: [...product.imageUrls, ...newImageUrls]
     });
   }}
 />
@@ -497,7 +502,7 @@ The upload button is intelligently managed by the component:
 
 ```tsx
 // Basic upload with file count (shows total files including initial)
-<ImageUploader 
+<ImageUploader
   uploadUrl="/api/upload"
   initialImages={["existing1.jpg", "existing2.jpg"]}
   // Button shows "Upload (4 files)" when 2 new files are added
@@ -505,7 +510,7 @@ The upload button is intelligently managed by the component:
 />
 
 // Custom text with selective upload
-<ImageUploader 
+<ImageUploader
   uploadUrl="/api/upload"
   uploadButtonText="Upload New Images"
   initialImages={existingImageUrls}
@@ -515,7 +520,7 @@ The upload button is intelligently managed by the component:
 />
 
 // Custom styling with smart upload
-<ImageUploader 
+<ImageUploader
   uploadUrl="/api/upload"
   uploadButtonClassName="custom-upload-btn"
   initialImages={currentImages}
@@ -524,7 +529,7 @@ The upload button is intelligently managed by the component:
 />
 
 // Hidden upload button (manual upload with selective logic)
-<ImageUploader 
+<ImageUploader
   uploadUrl="/api/upload"
   showUploadButton={false}
   initialImages={existingImages}
@@ -567,7 +572,7 @@ You can override the default upload button styling:
 
 ```tsx
 // Use your own CSS class
-<ImageUploader 
+<ImageUploader
   uploadUrl="/api/upload"
   uploadButtonClassName="my-custom-button"
 />
@@ -597,7 +602,7 @@ The built-in upload button uses these CSS classes:
 
 - `.upload-button-container` - Container wrapper
 - `.upload-button` - Main button styling
-- `.upload-button-text` - Button text styling  
+- `.upload-button-text` - Button text styling
 - `.upload-file-count` - File count badge styling
 
 You can also import the CSS file directly from the dist folder:
